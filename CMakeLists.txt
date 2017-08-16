@@ -5,10 +5,10 @@ find_package(catkin REQUIRED COMPONENTS
   #libvimba
   camera_info_manager
   diagnostic_updater
-  driver_base
   dynamic_reconfigure
   image_geometry
   image_transport
+  message_filters
   roscpp
   sensor_msgs
   std_msgs
@@ -23,11 +23,12 @@ target_architecture(ARCH)
 #add dynamic reconfigure api
 generate_dynamic_reconfigure_options(
   cfg/AvtVimbaCamera.cfg
+  cfg/AvtVimbaCameraStereo.cfg
 )
 
 catkin_package(
   INCLUDE_DIRS include
-  CATKIN_DEPENDS camera_info_manager diagnostic_updater driver_base dynamic_reconfigure image_geometry image_transport roscpp sensor_msgs std_msgs polled_camera
+  CATKIN_DEPENDS camera_info_manager diagnostic_updater dynamic_reconfigure image_geometry image_transport roscpp sensor_msgs std_msgs polled_camera
 )
 
 ###########
@@ -58,6 +59,12 @@ function(add_dependencies_and_linkings arg)
       ${CMAKE_CURRENT_SOURCE_DIR}/lib/64bit/libVimbaC.so
       ${CMAKE_CURRENT_SOURCE_DIR}/lib/64bit/libVimbaCPP.so
     )
+  elseif("${ARCH}" STREQUAL armv7)
+    target_link_libraries(${arg}
+      ${catkin_LIBRARIES}
+      ${CMAKE_CURRENT_SOURCE_DIR}/lib/arm_32bit/libVimbaC.so
+      ${CMAKE_CURRENT_SOURCE_DIR}/lib/arm_32bit/libVimbaCPP.so
+    )
   else()
     message(FATAL_ERROR "[libvimba]: Architecture ${ARCH} not suported. Exiting...")
   endif()
@@ -81,6 +88,13 @@ add_executable(stereo_camera_node
 
 add_dependencies_and_linkings(stereo_camera_node)
 
+add_executable(sync_node
+  src/nodes/sync_node.cpp
+  src/sync.cpp
+)
+
+add_dependencies_and_linkings(sync_node)
+
 #############
 ## Install ##
 #############
@@ -102,7 +116,8 @@ install(DIRECTORY include
 ## Mark other files for installation (e.g. launch and bag files, etc.)
 install(FILES
   launch/mono_camera.launch
-  launch/stereo_camera.launch
+  launch/stereo_camera_one_node.launch
+  launch/stereo_camera_two_nodes.launch
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
 
@@ -118,4 +133,11 @@ elseif("${ARCH}" STREQUAL x86_64)
     ${CMAKE_CURRENT_SOURCE_DIR}/lib/64bit/libVimbaCPP.so
     DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   )
+elseif("${ARCH}" STREQUAL armv7)
+  install(FILES
+    ${CMAKE_CURRENT_SOURCE_DIR}/lib/arm_32bit/libVimbaC.so
+    ${CMAKE_CURRENT_SOURCE_DIR}/lib/arm_32bit/libVimbaCPP.so
+    DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  )
 endif()
+

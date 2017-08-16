@@ -81,6 +81,7 @@ class AvtVimbaCamera {
   void stop();
   double getTimestamp(void);
   bool resetTimestamp(void);
+  double getDeviceTemp(void);
 
   CameraPtr getCameraPtr(void) {
     return vimba_camera_ptr_;
@@ -155,7 +156,7 @@ class AvtVimbaCamera {
   std::string interfaceToString(VmbInterfaceType interfaceType);
   std::string accessModeToString(VmbAccessModeType modeType);
   int getTriggerModeInt(std::string mode_str);
-  void printAllCameraFeatures(CameraPtr camera);
+  void printAllCameraFeatures(const CameraPtr& camera);
 
   void updateAcquisitionConfig(Config& config);
   void updateExposureConfig(Config& config);
@@ -167,6 +168,7 @@ class AvtVimbaCamera {
   void updatePixelFormatConfig(Config& config);
   void updatePtpModeConfig(Config& config);
   void updateGPIOConfig(Config& config);
+  void updateIrisConfig(Config& config);
 
   void getCurrentState(diagnostic_updater::DiagnosticStatusWrapper &stat);
 

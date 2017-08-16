@@ -48,6 +48,8 @@ class LockableMap : public virtual BasicLockable
     std::map<T1, T2> Map;
 };
 
+char const * const AVT_IP_OR_MAC_ADDRESS = "IP_OR_MAC@";
+
 }} // AVT::VmbAPI
 
 #endif

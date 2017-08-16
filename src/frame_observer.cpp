@@ -1,6 +1,6 @@
 ﻿/// Copyright (c) 2014,
 /// Systems, Robotics and Vision Group
-/// University of the Balearican Islands
+/// University of the Balearic Islands
 /// All rights reserved.
 ///
 /// Redistribution and use in source and binary forms, with or without
@@ -13,9 +13,9 @@
 ///     * All advertising materials mentioning features or use of this software
 ///       must display the following acknowledgement:
 ///       This product includes software developed by
-///       Systems, Robotics and Vision Group, Univ. of the Balearican Islands
+///       Systems, Robotics and Vision Group, Univ. of the Balearic Islands
 ///     * Neither the name of Systems, Robotics and Vision Group, University of
-///       the Balearican Islands nor the names of its contributors may be used
+///       the Balearic Islands nor the names of its contributors may be used
 ///       to endorse or promote products derived from this software without
 ///       specific prior written permission.
 ///
@@ -31,6 +31,7 @@
 /// THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <avt_vimba_camera/frame_observer.h>
+#include <iostream>
 
 FrameObserver::FrameObserver(CameraPtr cam_ptr, Callback callback) : IFrameObserver( cam_ptr ), callback_(callback), cam_ptr_(cam_ptr)
 {
@@ -40,44 +41,39 @@ FrameObserver::FrameObserver(CameraPtr cam_ptr, Callback callback) : IFrameObser
 void FrameObserver::FrameReceived( const FramePtr vimba_frame_ptr )
 {
   VmbFrameStatusType eReceiveStatus;
+  VmbErrorType err = vimba_frame_ptr->GetReceiveStatus(eReceiveStatus);
 
-  if ( VmbErrorSuccess == vimba_frame_ptr->GetReceiveStatus( eReceiveStatus ))
-  {
-    // Lock the frame queue
-    mutex.lock();
-    // Add frame to queue
-    vimba_frames.push( vimba_frame_ptr );
-    // Call the callback
-    callback_(vimba_frame_ptr);
-    // Unlock frame queue
-    mutex.unlock();
+  if (err == VmbErrorSuccess) {
+    switch (eReceiveStatus)
+    {
+      case VmbFrameStatusComplete:
+      {
+        // Call the callback
+        callback_(vimba_frame_ptr);
+        break;
+      }
+      case VmbFrameStatusIncomplete:
+      {
+        std::cout << "ERR: FrameObserver VmbFrameStatusIncomplete" << std::endl;
+        break;
+      }
+      case VmbFrameStatusTooSmall:
+      {
+        std::cout << "ERR: FrameObserver VmbFrameStatusTooSmall" << std::endl;
+        break;
+      }
+      case VmbFrameStatusInvalid:
+      {
+        std::cout << "ERR: FrameObserver VmbFrameStatusInvalid" << std::endl;
+        break;
+      }
+      default:
+      {
+        std::cout << "ERR: FrameObserver no known status" << std::endl;
+        break;
+      }
+    }
   }
-  else
-  {
-    // If any error occurred we queue the frame without notification
-    cam_ptr_->QueueFrame( vimba_frame_ptr );
-  }
-}
 
-// Returns the oldest frame that has not been picked up yet
-FramePtr FrameObserver::GetFrame()
-{
-  // Lock the frame queue
-  mutex.lock();
-  // Pop frame from queue
-  FramePtr res = vimba_frames.front();
-  // Unlock frame queue
-  mutex.unlock();
-  return res;
-}
-
-void FrameObserver::ClearFrameQueue()
-{
-  // Lock the frame queue
-  mutex.lock();
-  // Clear the frame queue and release the memory
-  std::queue<FramePtr> empty;
-  std::swap( vimba_frames, empty );
-  // Unlock the frame queue
-  mutex.unlock();
+  cam_ptr_->QueueFrame( vimba_frame_ptr );
 }

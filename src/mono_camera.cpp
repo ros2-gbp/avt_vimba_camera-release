@@ -13,9 +13,9 @@
 ///     * All advertising materials mentioning features or use of this software
 ///       must display the following acknowledgement:
 ///       This product includes software developed by
-///       Systems, Robotics and Vision Group, Univ. of the Balearican Islands
+///       Systems, Robotics and Vision Group, Univ. of the Balearic Islands
 ///     * Neither the name of Systems, Robotics and Vision Group, University of
-///       the Balearican Islands nor the names of its contributors may be used
+///       the Balearic Islands nor the names of its contributors may be used
 ///       to endorse or promote products derived from this software without
 ///       specific prior written permission.
 ///
@@ -36,7 +36,7 @@
 
 namespace avt_vimba_camera {
 
-MonoCamera::MonoCamera(ros::NodeHandle nh, ros::NodeHandle nhp) : nh_(nh), nhp_(nhp), it_(nhp), cam_("camera") {
+MonoCamera::MonoCamera(ros::NodeHandle nh, ros::NodeHandle nhp) : nh_(nh), nhp_(nhp), it_(nhp), cam_(ros::this_node::getName()) {
   // Prepare node handle for the camera
   // TODO use nodelets with getMTNodeHandle()
 
@@ -71,12 +71,12 @@ MonoCamera::~MonoCamera(void) {
 
 void MonoCamera::frameCallback(const FramePtr& vimba_frame_ptr) {
   ros::Time ros_time = ros::Time::now();
-  ROS_INFO("Frame callback entered");
   if (pub_.getNumSubscribers() > 0) {
     sensor_msgs::Image img;
     if (api_.frameToImage(vimba_frame_ptr, img)) {
       sensor_msgs::CameraInfo ci = info_man_->getCameraInfo();
       ci.header.stamp = img.header.stamp = ros_time;
+      img.header.frame_id = ci.header.frame_id;
       pub_.publish(img, ci);
     } else {
       ROS_WARN_STREAM("Function frameToImage returned 0. No image published.");
@@ -105,8 +105,10 @@ void MonoCamera::configure(Config& newconfig, uint32_t level) {
     if (!cam_.isOpened()) {
       cam_.start(ip_, guid_, show_debug_prints_);
     }
+
+    Config config = newconfig;
     cam_.updateConfig(newconfig);
-    updateCameraInfo(newconfig);
+    updateCameraInfo(config);
   } catch (const std::exception& e) {
     ROS_ERROR_STREAM("Error reconfiguring mono_camera node : " << e.what());
   }
@@ -121,10 +123,14 @@ void MonoCamera::updateCameraInfo(const avt_vimba_camera::AvtVimbaCameraConfig& 
   ci.header.frame_id = config.frame_id;
 
   // Set the operational parameters in CameraInfo (binning, ROI)
-  ci.height    = config.height;
+  int binning_or_decimation_x = std::max(config.binning_x, config.decimation_x);
+  int binning_or_decimation_y = std::max(config.binning_y, config.decimation_y);
+
+  // Set the operational parameters in CameraInfo (binning, ROI)
+  ci.height    = config.height; 
   ci.width     = config.width;
-  ci.binning_x = config.binning_x;
-  ci.binning_y = config.binning_y;
+  ci.binning_x = binning_or_decimation_x;
+  ci.binning_y = binning_or_decimation_y;
 
   // ROI in CameraInfo is in unbinned coordinates, need to scale up
   ci.roi.x_offset = config.roi_offset_x;
