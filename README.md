@@ -1,3 +1,26 @@
+## avt_vimba_camera (melodic) - 0.0.11-1
+
+The packages in the `avt_vimba_camera` repository were released into the `melodic` distro by running `/usr/bin/bloom-release --ros-distro melodic --track melodic avt_vimba_camera` on `Mon, 19 Aug 2019 22:43:17 -0000`
+
+The `avt_vimba_camera` package was released.
+
+Version of package(s) in repository `avt_vimba_camera`:
+
+- upstream repository: https://github.com/astuff/avt_vimba_camera.git
+- release repository: unknown
+- rosdistro version: `null`
+- old version: `null`
+- new version: `0.0.11-1`
+
+Versions of tools used:
+
+- bloom version: `0.8.0`
+- catkin_pkg version: `0.4.13`
+- rosdep version: `0.15.2`
+- rosdistro version: `0.7.4`
+- vcstools version: `0.1.40`
+
+
 ## avt_vimba_camera (lunar) - 0.0.10-0
 
 The packages in the `avt_vimba_camera` repository were released into the `lunar` distro by running `/usr/bin/bloom-release avt_vimba_camera --track lunar --rosdistro lunar` on `Wed, 16 Aug 2017 10:49:09 -0000`
