@@ -1,3 +1,4 @@
+release_repo_url: https://github.com/astuff/avt_vimba_camera-release.git
 tracks:
   hydro:
     actions:
