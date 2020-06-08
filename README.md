@@ -1,3 +1,26 @@
+## avt_vimba_camera (noetic) - 0.0.12-1
+
+The packages in the `avt_vimba_camera` repository were released into the `noetic` distro by running `/usr/bin/bloom-release avt_vimba_camera --rosdistro noetic --track noetic --new-track` on `Mon, 08 Jun 2020 21:17:42 -0000`
+
+The `avt_vimba_camera` package was released.
+
+Version of package(s) in repository `avt_vimba_camera`:
+
+- upstream repository: https://github.com/astuff/avt_vimba_camera.git
+- release repository: unknown
+- rosdistro version: `null`
+- old version: `null`
+- new version: `0.0.12-1`
+
+Versions of tools used:
+
+- bloom version: `0.9.7`
+- catkin_pkg version: `0.4.20`
+- rosdep version: `0.19.0`
+- rosdistro version: `0.8.2`
+- vcstools version: `0.1.42`
+
+
 ## avt_vimba_camera (melodic) - 0.0.12-1
 
 The packages in the `avt_vimba_camera` repository were released into the `melodic` distro by running `/usr/bin/bloom-release avt_vimba_camera --rosdistro melodic --track melodic --edit` on `Mon, 08 Jun 2020 21:00:51 -0000`
