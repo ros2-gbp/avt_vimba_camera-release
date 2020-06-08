@@ -109,7 +109,7 @@ tracks:
     patches: null
     release_inc: '1'
     release_repo_url: null
-    release_tag: 0.0.11
+    release_tag: 0.0.12
     ros_distro: melodic
     vcs_type: git
     vcs_uri: https://github.com/astuff/avt_vimba_camera.git
