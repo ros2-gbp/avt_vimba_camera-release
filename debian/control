@@ -1,0 +1,12 @@
+Source: ros-melodic-avt-vimba-camera
+Section: misc
+Priority: optional
+Maintainer: AutonomouStuff Software Team <software@autonomoustuff.com>
+Build-Depends: debhelper (>= 9.0.0), ros-melodic-camera-info-manager, ros-melodic-catkin, ros-melodic-diagnostic-updater, ros-melodic-dynamic-reconfigure, ros-melodic-image-transport, ros-melodic-message-filters, ros-melodic-nodelet, ros-melodic-roscpp, ros-melodic-sensor-msgs, ros-melodic-std-msgs
+Homepage: https://github.com/astuff/avt_vimba_camera
+Standards-Version: 3.9.2
+
+Package: ros-melodic-avt-vimba-camera
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-melodic-camera-info-manager, ros-melodic-diagnostic-updater, ros-melodic-dynamic-reconfigure, ros-melodic-image-proc, ros-melodic-image-transport, ros-melodic-message-filters, ros-melodic-nodelet, ros-melodic-roscpp, ros-melodic-sensor-msgs, ros-melodic-std-msgs, ros-melodic-stereo-image-proc
+Description: Camera driver for Allied Vision Technologies (AVT) cameras, based on their Vimba SDK.
