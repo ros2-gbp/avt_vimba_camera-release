@@ -1,0 +1,12 @@
+Source: ros-noetic-avt-vimba-camera
+Section: misc
+Priority: optional
+Maintainer: AutonomouStuff Software Team <software@autonomoustuff.com>
+Build-Depends: debhelper (>= 9.0.0), ros-noetic-camera-info-manager, ros-noetic-catkin, ros-noetic-diagnostic-updater, ros-noetic-dynamic-reconfigure, ros-noetic-image-transport, ros-noetic-message-filters, ros-noetic-nodelet, ros-noetic-roscpp, ros-noetic-sensor-msgs, ros-noetic-std-msgs
+Homepage: https://github.com/astuff/avt_vimba_camera
+Standards-Version: 3.9.2
+
+Package: ros-noetic-avt-vimba-camera
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-noetic-camera-info-manager, ros-noetic-diagnostic-updater, ros-noetic-dynamic-reconfigure, ros-noetic-image-proc, ros-noetic-image-transport, ros-noetic-message-filters, ros-noetic-nodelet, ros-noetic-roscpp, ros-noetic-sensor-msgs, ros-noetic-std-msgs, ros-noetic-stereo-image-proc
+Description: Camera driver for Allied Vision Technologies (AVT) cameras, based on their Vimba SDK.
