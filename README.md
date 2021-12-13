@@ -1,3 +1,26 @@
+## avt_vimba_camera (foxy) - 2001.1.0-1
+
+The packages in the `avt_vimba_camera` repository were released into the `foxy` distro by running `/usr/bin/bloom-release --rosdistro foxy --track foxy --new-track avt_vimba_camera` on `Mon, 13 Dec 2021 16:21:21 -0000`
+
+The `avt_vimba_camera` package was released.
+
+Version of package(s) in repository `avt_vimba_camera`:
+
+- upstream repository: https://github.com/astuff/avt_vimba_camera.git
+- release repository: unknown
+- rosdistro version: `null`
+- old version: `null`
+- new version: `2001.1.0-1`
+
+Versions of tools used:
+
+- bloom version: `0.10.7`
+- catkin_pkg version: `0.4.24`
+- rosdep version: `0.21.0`
+- rosdistro version: `0.8.3`
+- vcstools version: `0.1.42`
+
+
 ## avt_vimba_camera (melodic) - 1.0.0-1
 
 The packages in the `avt_vimba_camera` repository were released into the `melodic` distro by running `/usr/bin/bloom-release --rosdistro melodic --track melodic --new-track avt_vimba_camera` on `Tue, 30 Nov 2021 21:33:59 -0000`
