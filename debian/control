@@ -1,0 +1,12 @@
+Source: ros-foxy-avt-vimba-camera
+Section: misc
+Priority: optional
+Maintainer: AutonomouStuff Software Team <software@autonomoustuff.com>
+Build-Depends: debhelper (>= 9.0.0), ros-foxy-ament-cmake-auto, ros-foxy-camera-info-manager, ros-foxy-diagnostic-msgs, ros-foxy-diagnostic-updater, ros-foxy-image-transport, ros-foxy-message-filters, ros-foxy-rclcpp, ros-foxy-rclcpp-components, ros-foxy-sensor-msgs, ros-foxy-std-msgs, ros-foxy-ros-workspace
+Homepage: https://github.com/astuff/avt_vimba_camera
+Standards-Version: 3.9.2
+
+Package: ros-foxy-avt-vimba-camera
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-foxy-camera-info-manager, ros-foxy-diagnostic-msgs, ros-foxy-diagnostic-updater, ros-foxy-image-proc, ros-foxy-image-transport, ros-foxy-message-filters, ros-foxy-rclcpp, ros-foxy-rclcpp-components, ros-foxy-sensor-msgs, ros-foxy-std-msgs, ros-foxy-stereo-image-proc, ros-foxy-ros-workspace
+Description: Camera driver for Allied Vision Technologies (AVT) cameras, based on their Vimba SDK.
