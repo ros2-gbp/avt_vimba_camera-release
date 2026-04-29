@@ -1,0 +1,12 @@
+Source: ros-lyrical-avt-vimba-camera
+Section: misc
+Priority: optional
+Maintainer: AutonomouStuff Software Team <software@autonomoustuff.com>
+Build-Depends: debhelper (>= 9.0.0), ros-lyrical-ament-cmake-auto, ros-lyrical-camera-info-manager, ros-lyrical-diagnostic-msgs, ros-lyrical-diagnostic-updater, ros-lyrical-image-transport, ros-lyrical-message-filters, ros-lyrical-rclcpp, ros-lyrical-rclcpp-components, ros-lyrical-sensor-msgs, ros-lyrical-std-msgs, ros-lyrical-ros-workspace
+Homepage: https://github.com/astuff/avt_vimba_camera
+Standards-Version: 3.9.2
+
+Package: ros-lyrical-avt-vimba-camera
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-lyrical-camera-info-manager, ros-lyrical-diagnostic-msgs, ros-lyrical-diagnostic-updater, ros-lyrical-image-proc, ros-lyrical-image-transport, ros-lyrical-message-filters, ros-lyrical-rclcpp, ros-lyrical-rclcpp-components, ros-lyrical-sensor-msgs, ros-lyrical-std-msgs, ros-lyrical-stereo-image-proc, ros-lyrical-ros-workspace
+Description: Camera driver for Allied Vision Technologies (AVT) cameras, based on their Vimba SDK.
